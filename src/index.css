@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    background-image:
+      radial-gradient(circle at 8% -8%, rgba(255, 255, 255, 0.88), transparent 34rem),
+      radial-gradient(circle at 92% 22%, rgba(197, 106, 74, 0.045), transparent 30rem);
+    background-repeat: no-repeat;
+    min-width: 320px;
+  }
+
+  ::selection {
+    background: #1c1b18;
+    color: #f7f5f0;
+  }
+
+  :focus-visible {
+    outline: 2px solid #1c1b18;
+    outline-offset: 4px;
+  }
+
+  button,
+  a,
+  label {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-[9px] font-medium uppercase tracking-[0.26em] text-muted sm:text-[10px];
+  }
+
+  .section-index {
+    @apply font-sans text-[9px] font-medium uppercase tracking-[0.24em] text-muted;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-line;
+  }
+
+  .wheel-slice {
+    cursor: pointer;
+    filter: saturate(0.36);
+    opacity: 0.24;
+    transform-origin: 280px 280px;
+    transition:
+      opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .wheel-option:hover .wheel-slice,
+  .wheel-option:focus-visible .wheel-slice {
+    filter: saturate(0.86);
+    opacity: 0.68;
+  }
+
+  .wheel-option[data-selected='true'] .wheel-slice {
+    filter: saturate(1);
+    opacity: 1;
+  }
+
+  .wheel-label {
+    fill: #827d73;
+    font-family: 'Manrope', sans-serif;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: fill 300ms ease;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .wheel-option:hover .wheel-label,
+  .wheel-option[data-selected='true'] .wheel-label {
+    fill: #1c1b18;
+  }
+
+  .wheel-option:focus-visible {
+    outline: none;
+  }
+
+  .wheel-option:focus-visible .wheel-slice {
+    stroke: #1c1b18;
+    stroke-width: 1.25px;
+  }
+
+  .palette-row {
+    transition: opacity 300ms ease;
+  }
+}
+
+@media (max-width: 639px) {
+  .wheel-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
